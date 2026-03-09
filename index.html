@@ -10,6 +10,31 @@
   <meta name="description" content="Vimalnath Investment – Trusted SIP & Mutual Fund advisor. Connect with Harshad Jain for expert financial planning." />
   <title>Vimalnath Investment | SIP Master Harshad Jain</title>
 
+  <!-- Favicon / Website Icon -->
+  <link rel="icon" type="image/png" href="pfp.png" />
+  <link rel="apple-touch-icon" href="pfp.png" />
+
+  <!-- Preload Critical Images for Performance -->
+  <link rel="preload" as="image" href="pfp.png" />
+  <link rel="preload" as="image" href="bannerv.png" />
+
+  <!-- Open Graph / Link Preview Metadata -->
+  <meta property="og:url" content="https://vimalnathinvestments.netlify.app/" />
+  <meta property="og:title" content="Vimalnath Investment | SIP Master Harshad Jain" />
+  <meta property="og:description" content="Vimalnath Investment – Trusted SIP & Mutual Fund advisor. Connect with Harshad Jain for expert financial planning." />
+  <meta property="og:image" content="https://vimalnathinvestments.netlify.app/pfp.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:type" content="website" />
+
+  <!-- Twitter Card Metadata -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:domain" content="vimalnathinvestments.netlify.app" />
+  <meta name="twitter:url" content="https://vimalnathinvestments.netlify.app/" />
+  <meta name="twitter:title" content="Vimalnath Investment | SIP Master Harshad Jain" />
+  <meta name="twitter:description" content="Vimalnath Investment – Trusted SIP & Mutual Fund advisor. Connect with Harshad Jain for expert financial planning." />
+  <meta name="twitter:image" content="https://vimalnathinvestments.netlify.app/pfp.png" />
+
   <!-- Google Fonts: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -51,6 +76,16 @@
               '0%': { opacity: '0' },
               '100%': { opacity: '1' },
             },
+            gradientBorder: {
+              '0%': { backgroundPosition: '0% 50%' },
+              '50%': { backgroundPosition: '100% 50%' },
+              '100%': { backgroundPosition: '0% 50%' },
+            },
+          },
+          animation: {
+            'fade-in-up': 'fadeInUp 0.6s ease forwards',
+            'fade-in': 'fadeIn 0.8s ease forwards',
+            'gradient-border': 'gradientBorder 3s ease infinite',
           },
           boxShadow: {
             'soft': '0 4px 25px rgba(0, 0, 0, 0.05)',
@@ -132,19 +167,6 @@
     }
 
     /* ==============================
-       Scroll Reveal (JS driven)
-    ============================== */
-    .reveal {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ==============================
        Divider Shimmer
     ============================== */
     .shimmer-line {
@@ -206,6 +228,7 @@
       height: 300px; /* Increased Height */
       z-index: 0;
       background-color: #FAFAFA;
+      will-change: transform, opacity; /* Hardware acceleration hint */
     }
     .banner-container {
       width: 100%;
@@ -217,6 +240,7 @@
       background-repeat: no-repeat;
       background-position: center top; /* Shifted to absolute top */
       position: relative;
+      will-change: background-position; /* Optimization */
     }
     .banner-wrapper::after {
       content: '';
@@ -297,8 +321,9 @@
   ============================================================ -->
   <main class="relative z-10 min-h-screen flex flex-col items-center px-4 pt-56 pb-16 w-full max-w-md mx-auto">
 
-    <!-- Premium Gold Card Wrapper -->
-    <div class="w-full bg-white/95 backdrop-blur-xl rounded-[2rem] p-5 sm:p-6 flex flex-col gap-4 relative shadow-[0_12px_45px_rgba(212,175,55,0.12)] border border-[#E5E7EB]">
+    <!-- Premium Gold Card Wrapper (Animated Border) -->
+    <div class="w-full rounded-[2rem] p-[4px] relative bg-gradient-to-br from-gold-400 via-gold-600 to-gold-400 bg-[length:200%_200%] animate-gradient-border shadow-[0_12px_45px_rgba(212,175,55,0.12)]">
+      <div class="w-full bg-white/95 backdrop-blur-xl rounded-[calc(2rem-4px)] p-5 sm:p-6 flex flex-col gap-4 relative">
 
       <!-- ===================================================
            PROFILE SECTION
@@ -307,8 +332,8 @@
       
         <!-- Profile Picture Layout -->
         <div class="profile-img-container w-full relative z-10 flex justify-center mt-[-100px] mb-2">
-          <!-- Center Main PFP -->
-          <img src="pfp.png" alt="Profile Picture" class="profile-img object-cover rounded-full border-[3px] border-gold-500 shadow-[0_8px_30px_rgba(212,175,55,0.3)] bg-white w-[140px] h-[140px] z-10" />
+          <!-- Center Main PFP - Optimized for fast loading -->
+          <img src="pfp.png" alt="Profile Picture" fetchpriority="high" decoding="async" loading="eager" class="profile-img object-cover rounded-full border-[3px] border-gold-500 shadow-[0_8px_30px_rgba(212,175,55,0.3)] bg-white w-[140px] h-[140px] z-10" />
         </div>
 
         <!-- Brand Name -->
@@ -503,20 +528,38 @@
       =================================================== -->
       <div class="reveal" style="transition-delay: 0.30s;">
         <p class="section-label mt-1">Follow Us</p>
-        <a href="https://www.instagram.com/vimalnath_investment/" target="_blank" rel="noopener noreferrer" class="link-card" id="btn-instagram" onclick="createRipple(event)">
-          <div class="icon-circle">
-            <svg viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+        <div class="flex flex-col gap-3">
+          <a href="https://www.instagram.com/vimalnath_investment/" target="_blank" rel="noopener noreferrer" class="link-card" id="btn-instagram" onclick="createRipple(event)">
+            <div class="icon-circle">
+              <svg viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+              </svg>
+            </div>
+            <div class="flex-1">
+              <p class="text-finances-900 font-semibold text-sm">Instagram</p>
+              <p class="text-xs text-gray-500 mt-0.5">@vimalnath_investment</p>
+            </div>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 text-gray-400">
+              <path fill-rule="evenodd" d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z" clip-rule="evenodd" />
             </svg>
-          </div>
-          <div class="flex-1">
-            <p class="text-finances-900 font-semibold text-sm">Instagram</p>
-            <p class="text-xs text-gray-500 mt-0.5">@vimalnath_investment</p>
-          </div>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 text-gray-400">
-            <path fill-rule="evenodd" d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z" clip-rule="evenodd" />
-          </svg>
-        </a>
+          </a>
+
+          <!-- Facebook Button -->
+          <a href="https://www.facebook.com/vimalnathinvestment" target="_blank" rel="noopener noreferrer" class="link-card" id="btn-facebook" onclick="createRipple(event)">
+            <div class="icon-circle" style="background: rgba(24, 119, 242, 0.1); color: #1877F2;">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                <path d="M12 2.04c-5.5 0-10 4.49-10 10.02 0 5.02 3.66 9.15 8.44 9.88v-6.99h-2.54V12.06h2.54V9.89c0-2.5 1.49-3.89 3.78-3.89 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.84h2.78l-.44 2.89h-2.34v6.99c4.78-.73 8.44-4.86 8.44-9.88 0-5.53-4.5-10.02-10-10.02z"/>
+              </svg>
+            </div>
+            <div class="flex-1">
+              <p class="text-finances-900 font-semibold text-sm">Facebook</p>
+              <p class="text-xs text-gray-500 mt-0.5">Vimalnath Investment</p>
+            </div>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 text-gray-400">
+              <path fill-rule="evenodd" d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z" clip-rule="evenodd" />
+            </svg>
+          </a>
+        </div>
       </div>
 
       <!-- ===================================================
@@ -600,13 +643,27 @@
            FOOTER
       =================================================== -->
       <footer class="text-center pb-4 reveal" style="transition-delay: 0.48s;">
-        <p class="footer-text">
+        <p class="footer-text font-medium mb-1">
           Trusted Investment Guidance &nbsp;|&nbsp; SIP &nbsp;|&nbsp; Mutual Funds
         </p>
         <p class="footer-text mt-1">
           © 2025 Vimalnath Investment. All rights reserved.
         </p>
+        
+        <div class="mt-4 pt-4 border-t border-gray-100 flex flex-col items-center gap-1">
+          <p class="text-[0.65rem] text-gray-400 font-medium tracking-wide">
+            Designed by <span class="text-gold-500 font-semibold">Vishwa Alpesh Shah</span>
+          </p>
+          <a href="https://wa.me/919594503214?text=Hi,%20I%20want%20a%20digital%20visiting%20card%20like%20Vimalnath%20Investment" target="_blank" rel="noopener noreferrer" class="text-[0.65rem] text-gray-400 hover:text-gold-500 transition-colors flex items-center gap-1 group">
+            Want your custom link? Contact <span class="group-hover:underline">9594503214</span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-3 h-3">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+            </svg>
+          </a>
+        </div>
       </footer>
+
+      </div><!-- Closing Inner Card Wrapper -->
 
     </div><!-- /max-w-md -->
   </main>
@@ -615,22 +672,6 @@
        JAVASCRIPT – Scroll Reveal + Ripple Effects
   ============================================================ -->
   <script>
-    // ==============================
-    // Scroll Reveal Observer
-    // ==============================
-    const revealElements = document.querySelectorAll('.reveal');
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1 });
-
-    revealElements.forEach(el => observer.observe(el));
-
     // ==============================
     // Ripple Effect on Click
     // ==============================
@@ -652,17 +693,6 @@
       button.appendChild(circle);
     }
 
-    // ==============================
-    // Trigger reveals on load (above fold)
-    // ==============================
-    window.addEventListener('load', () => {
-      revealElements.forEach(el => {
-        const rect = el.getBoundingClientRect();
-        if (rect.top < window.innerHeight) {
-          el.classList.add('visible');
-        }
-      });
-    });
   </script>
 
 </body>
